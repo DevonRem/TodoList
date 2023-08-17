@@ -31,7 +31,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     padding-top: 10px;
-
+    min-width: 200px;
 }
 
 .main-content {
@@ -49,4 +49,30 @@ html, body {
 .inbox, .today, .projects {
     padding-top: 20px;
     font-size: 20px;
+}
+
+.inbox, .today {
+    display: flex;
+    padding-right: 90px;
+    margin-top: 10px;
+
+}
+
+.inbox, .today, .newProject {
+    background: none;
+    border: none;
+    
+}
+
+.inbox:hover, .today:hover, .newProject:hover {
+    background-color: #219ebc;
+    cursor: pointer;
+}
+
+.newProject {
+    font-size: 20px;
+}
+
+.sidebarText {
+    margin-top: 10px;
 }
