@@ -65,12 +65,12 @@ html, body {
 }
 
 .inbox:hover, .today:hover, .newProject:hover {
-    background-color: #219ebc;
+
     cursor: pointer;
 }
 
 .inbox {
-    background-color: #219ebc; 
+
 }
 
 .newProject {

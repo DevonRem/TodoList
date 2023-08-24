@@ -1,5 +1,6 @@
 const Content = document.querySelector('.main-content');
 let sidebarBtns = document.querySelectorAll('#sidebarbtns');
+let sideBar = document.querySelector('.sidebar');
 //need to get sidebarbtns again when i dynamically add new projects
 let todoArray = [];
 
@@ -62,9 +63,7 @@ function inboxLoad() {
     const mainContentItems = document.querySelectorAll('.main-content > *');
     const cards = document.querySelectorAll('.card');
 
-    for(let i=0; i<sidebarBtns.length; i++){
-        sidebarBtns[i].style.backgroundColor = "#8ecae6";
-    }
+
 
     for(let i=0; i<mainContentItems.length; i++){
         mainContentItems[i].style.display = "none";
@@ -75,8 +74,7 @@ function inboxLoad() {
     }
 
 
-    const inboxBtn = document.querySelector('.inbox');
-    inboxBtn.style.backgroundColor = "#219ebc";
+
 
     const inboxDiv = document.querySelector('.inboxDiv');
     inboxDiv.style.removeProperty( 'display');
@@ -85,16 +83,13 @@ function inboxLoad() {
 function todayLoad() {
     const mainContentItems = document.querySelectorAll('.main-content > *');
 
-    for(let i=0; i<sidebarBtns.length; i++){
-        sidebarBtns[i].style.backgroundColor = "#8ecae6";
-    }
+
 
     for(let i=0; i<mainContentItems.length; i++){
         mainContentItems[i].style.display = "none";
     }
 
-    const todayBtn = document.querySelector('.today');
-    todayBtn.style.backgroundColor = "#219ebc";
+
 
     const todayDiv = document.querySelector('.todayDiv');
 
@@ -211,6 +206,115 @@ function displayToDo() {
     }
 }
 
+function newprojectCreate() {
+    const form = document.createElement('FORM');
+    form.style.border = 'black';
+    form.style.borderStyle = 'solid';
+    sideBar.appendChild(form);
+    form.classList.add('form2');
+
+    form.style.paddingBottom = '30px';
+
+    const title = document.createElement('h3');
+    title.textContent = "Title";
+    form.appendChild(title);
+    const input1 = document.createElement('input');
+    input1.setAttribute("type", "text");
+    input1.classList.add('input1');
+    form.appendChild(input1);
+    form.style.backgroundColor = 'lightgray';
+
+    const cancelbtn = document.createElement('button');
+    cancelbtn.setAttribute("type", "button")
+    form.appendChild(cancelbtn);
+    const btntext2 = document.createElement('p');
+    btntext2.textContent = 'cancel';
+    cancelbtn.appendChild(btntext2);
+
+
+    cancelbtn.addEventListener('click', function(e) {
+        form.style.display = 'none';
+    });
+
+    const submitbtn = document.createElement('button');
+    submitbtn.setAttribute("type", "button")
+    form.appendChild(submitbtn);
+    const btntext = document.createElement('p');
+    btntext.textContent = 'submit';
+    submitbtn.appendChild(btntext);
+    submitbtn.style.marginLeft = '50px';
+ 
+
+    submitbtn.addEventListener('click', function(e) {
+        const newProject = document.createElement('button');
+        newProject.innerText = input1.value;
+        sideBar.appendChild(newProject);
+        newProject.style.backgroundColor = '#8ecae6';
+        newProject.style.marginTop = '10px';
+        newProject.style.border = 'none';
+        newProject.style.fontSize = '20px';
+        newProject.style.cursor = 'pointer';
+        newProject.classList.add('NewProjectSidebar')
+        form.style.display = 'none';
+
+        newProject.addEventListener('mouseover', function(e) {
+            e.target.style.backgroundColor = '#219ebc';
+    });
+    
+    newProject.addEventListener('mouseout', function(e) {
+            e.target.style.backgroundColor = '#8ecae6';
+    });
+
+    newProject.addEventListener('click', function(e) {
+
+        const mainContentItems = document.querySelectorAll('.main-content > *');
+
+        for(let i=0; i<mainContentItems.length; i++){
+            mainContentItems[i].style.display = "none";
+        }
+        const projectDiv = document.createElement('div');
+        Content.appendChild(projectDiv);
+        projectDiv.classList.add('projectDiv');
+        const title = document.createElement('H1');
+        title.innerText = input1.value;
+        projectDiv.appendChild(title);
+        title.style.paddingLeft = "50px";
+    
+        const newBtn2 = document.createElement('button');
+        newBtn2.innerText = '+ Add Task';
+        newBtn2.setAttribute("type", "button");
+        newBtn2.style.marginLeft = "50px";
+        newBtn2.classList.add('newBtn2');
+        projectDiv.appendChild(newBtn2);
+        newBtn2.addEventListener('click', function(e) {
+            displayForm();
+    });
+
+    const newBtn3 = document.createElement('button');
+    newBtn3.innerText = 'Delete Project';
+    newBtn3.setAttribute("type", "button");
+    newBtn3.style.marginLeft = "100px";
+    newBtn3.classList.add('newBtn3');
+    projectDiv.appendChild(newBtn3);
+    newBtn3.addEventListener('click', function(e) {
+        projectDiv.remove();
+        newProject.remove();
+        Content.style.display = "none";
+        
+});
+
+
+});
+
+    });
+
+
+}
+
+function newprojectLoad() {
+
+}
+
 //create newprojectcreate and newprojectload
 
-export { inboxCreate, todayCreate, inboxLoad, todayLoad, createForm, displayForm, displayToDo }
+export { inboxCreate, todayCreate, inboxLoad, todayLoad, createForm, displayForm, displayToDo, newprojectCreate, newprojectLoad }
