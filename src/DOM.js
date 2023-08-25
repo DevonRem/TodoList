@@ -1,7 +1,9 @@
+const { isToday } = require("date-fns/isToday");
+
 const Content = document.querySelector('.main-content');
 let sidebarBtns = document.querySelectorAll('#sidebarbtns');
 let sideBar = document.querySelector('.sidebar');
-//need to get sidebarbtns again when i dynamically add new projects
+
 let todoArray = [];
 
 
@@ -82,11 +84,16 @@ function inboxLoad() {
 
 function todayLoad() {
     const mainContentItems = document.querySelectorAll('.main-content > *');
-
+    const cards = document.querySelectorAll('.card');
 
 
     for(let i=0; i<mainContentItems.length; i++){
         mainContentItems[i].style.display = "none";
+    }
+    for(let i=0; i<cards.length; i++) {
+        //console.log(input3);
+        //if(isToday === //date )**
+        //{cards[i].style.removeProperty( 'display');}
     }
 
 
@@ -203,6 +210,19 @@ function displayToDo() {
         Content.appendChild(card);
         card.textContent = todoArray;
         todoArray.shift();
+
+        const deleteCard = document.createElement('button');
+
+        deleteCard.innerText = 'Delete ToDo';
+        deleteCard.setAttribute("type", "button");
+        deleteCard.style.marginLeft = "100px";
+        deleteCard.classList.add('deleteCard');
+        card.appendChild(deleteCard);
+        deleteCard.addEventListener('click', function(e) {
+            card.remove();
+            
+    });
+
     }
 }
 
@@ -279,6 +299,8 @@ function newprojectCreate() {
         title.innerText = input1.value;
         projectDiv.appendChild(title);
         title.style.paddingLeft = "50px";
+
+        
     
         const newBtn2 = document.createElement('button');
         newBtn2.innerText = '+ Add Task';
@@ -297,9 +319,9 @@ function newprojectCreate() {
     newBtn3.classList.add('newBtn3');
     projectDiv.appendChild(newBtn3);
     newBtn3.addEventListener('click', function(e) {
-        projectDiv.remove();
+        projectDiv.style.display = 'none';
         newProject.remove();
-        Content.style.display = "none";
+
         
 });
 
@@ -311,10 +333,8 @@ function newprojectCreate() {
 
 }
 
-function newprojectLoad() {
 
-}
 
-//create newprojectcreate and newprojectload
 
-export { inboxCreate, todayCreate, inboxLoad, todayLoad, createForm, displayForm, displayToDo, newprojectCreate, newprojectLoad }
+
+export { inboxCreate, todayCreate, inboxLoad, todayLoad, createForm, displayForm, displayToDo, newprojectCreate }
